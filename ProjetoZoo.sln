@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoZoo", "ProjetoZoo.csproj", "{822E9C19-A6E0-6D53-C5FB-F4A2D456F226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoZoo.Editor", "ProjetoZoo.Editor.csproj", "{34EE0853-AABF-500F-BCC8-CF36B13A9664}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{822E9C19-A6E0-6D53-C5FB-F4A2D456F226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{822E9C19-A6E0-6D53-C5FB-F4A2D456F226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{822E9C19-A6E0-6D53-C5FB-F4A2D456F226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{822E9C19-A6E0-6D53-C5FB-F4A2D456F226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34EE0853-AABF-500F-BCC8-CF36B13A9664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34EE0853-AABF-500F-BCC8-CF36B13A9664}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34EE0853-AABF-500F-BCC8-CF36B13A9664}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34EE0853-AABF-500F-BCC8-CF36B13A9664}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

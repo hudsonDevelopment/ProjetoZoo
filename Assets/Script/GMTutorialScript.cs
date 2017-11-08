@@ -45,6 +45,7 @@ public class GMTutorialScript : MonoBehaviour {
 		mensagensInit ();
 	
 		start = Time.time;
+        
 	}
 
 	private void backgroudInit(){

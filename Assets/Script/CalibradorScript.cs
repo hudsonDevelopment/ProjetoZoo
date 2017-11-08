@@ -23,6 +23,9 @@ public class CalibradorScript : MonoBehaviour
 
 	private bool ePraSalvar;
 
+    public bool controleTexto;// conferir qual texto ira ser exibido
+
+
 	// Textos de output
 	const string corTagIni = "<color=white>";
 	const string corTagFim = "</color>";
@@ -49,39 +52,54 @@ public class CalibradorScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (reiniciarBtn)
-			resetarCalibracao ();
+        if (reiniciarBtn)
+        {
+            resetarCalibracao();
+            reiniciarBtn = false;
+            //Debug.Log("Reiniciar clicado");
+        }
 
-		if (imDetector.isFound) {
+        if (imDetector.isFound) {
 
 			if (!(definido1 && definido2))
 				calibraMargens ();
 			else {
-				if (Time.time < recemCalibrado + 2.0f)
-					messenger.messengerTxt = corTagIni+texto3+corTagFim;
-				else {
-					if (verificaPosicao (CantosDobrado.transform, 20.0f))
-						messenger.messengerTxt = corTagIni+texto6+corTagFim;
-					else if (verificaPosicao (CantosEsticado.transform, 20.0f))
-						messenger.messengerTxt = corTagIni+texto7+corTagFim;
-					else
-						messenger.messengerTxt = "";
-				}
+                if (Time.time < recemCalibrado + 2.0f)
+                {
+                    messenger.messengerTxt = corTagIni + texto3 + corTagFim;
+                    controleTexto = true;
+                }
+                else
+                {
+                    if (verificaPosicao(CantosDobrado.transform, 20.0f))
+                    {
+                        messenger.messengerTxt = corTagIni + texto6 + corTagFim;
+                        controleTexto = true;
+                    }
+                    else if (verificaPosicao(CantosEsticado.transform, 20.0f))
+                    {
+                        messenger.messengerTxt = corTagIni + texto7 + corTagFim;
+                        controleTexto = true;
+                    }
+                    else
+                        messenger.messengerTxt = "";
+                }
 			}
 		} else {
 			if (!(definido1 && definido2))
 				messenger.messengerTxt = corTagIni+texto0+corTagFim;
 		}
+        //calibrarBtn = false;
 	}
 
 	public bool EstaCalibrado(){
 		return definido1 && definido2;
 	}
 
-	void OnGUI(){
+	/*void OnGUI(){
 		calibrarBtn = GUI.RepeatButton (new Rect (0, 0, 100.0f, 100.0f), "<b>Calibrar</b>");
 		reiniciarBtn = GUI.RepeatButton (new Rect (Screen.width - 100.0f, 0, 100.0f, 100.0f), "<b>Reiniciar</b>");
-	}
+	}*/
 
 	public void InsereCantos(GameObject CD, GameObject CE, GameObject IM){
 		CantosDobrado = CD;
@@ -103,6 +121,7 @@ public class CalibradorScript : MonoBehaviour
 	void calibraMargens(){
 		if (!definido1) {
 			messenger.messengerTxt = corTagIni+texto1+corTagFim;
+            controleTexto = true;
 
 			if (calibrarBtn) {
 				CantosDobrado.transform.GetChild (0).transform.position = ImageTarget.transform.GetChild (0).transform.position;
@@ -112,13 +131,15 @@ public class CalibradorScript : MonoBehaviour
 				CantosDobrado.GetComponent<SpawnaCantos> ().setaCantosPosicoes ();
 
 				definido1 = true;
-			}
+                //Debug.Log("Calibrar clicado");
+            }
 
 		}
 
 		if (definido1 && !definido2) {
 			//print (texto2);
 			messenger.messengerTxt = corTagIni+texto2+corTagFim;
+            controleTexto = true;
 
 			if (calibrarBtn && Time.time > temp + 2.0f) {
 				CantosEsticado.GetComponent<SpawnaCantos> ().setaSEeID (
@@ -130,9 +151,11 @@ public class CalibradorScript : MonoBehaviour
 				definido2 = true;
 			}
 		}
+        calibrarBtn = false;
+        
 
 
-	}
+    }
 
 	private bool verificaPosicao(Transform paiT, float distancia){
 		Vector3 child0 = cam.WorldToScreenPoint(paiT.GetChild(0).transform.position);
@@ -152,5 +175,30 @@ public class CalibradorScript : MonoBehaviour
 		CantosDobrado.GetComponent<SpawnaCantos> ().zeraCantosPosicoes ();
 		CantosEsticado.GetComponent<SpawnaCantos> ().zeraCantosPosicoes ();
 	}
+
+    public void setCalibrarBtn(bool calibrarBtn)
+    {
+        this.calibrarBtn = calibrarBtn;
+    }
+    public void setReiniciarBtn(bool reiniciarBtn)
+    {
+        this.reiniciarBtn = reiniciarBtn;
+    }
+    public bool getCalibrarBtn()
+    {
+        return this.calibrarBtn;
+    }
+    public bool getReiniciarBtn()
+    {
+        return this.reiniciarBtn;
+    }
+    public bool getDefinido1()
+    {
+        return this.definido1;
+    }
+    public bool getDefinido2()
+    {
+        return this.definido2;
+    }
 }
 
